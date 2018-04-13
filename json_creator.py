@@ -2,7 +2,7 @@ import json
 import hashlib
 import base64
 import urllib2
-
+import requests
 def calculate_MD5(filename):
 	'''
 	Calculate MD5 of an input file
@@ -42,7 +42,7 @@ json_dict = {
     "name": "Donnie Kim",
     "position": ["Machine Learning Scientist","Machine Learning Intern"],
     "notes": {
-    	"GitHub repo": "https://github.com/kdk411. LinkedIn",
+    	"GitHub repo": "https://github.com/kdk411",
     	"LinkedIn": "https://www.linkedin.com/in/donnie-kim-96a20490/"
     	},
     "phone": "(555) 664-7665",
@@ -64,15 +64,19 @@ json_dict = {
     "test_or_submit": "test"
 }
 
-dictionaryToJson = json.dumps(json_dict, sort_keys = True, indent=4)
-print(dictionaryToJson)
+dictionaryToJson_str = json.dumps(json_dict, sort_keys = True, indent=4)
+#print(dictionaryToJson_str)
 
-# Write a json object
+# # Write a json object
 with open('json_object_DonnieKim.json', 'w') as out:
-	json_object = json.dumps(json_dict, out)
+    json_object = json.dump(json_dict, out, indent = 4)
 
 #post the json file
 url = 'https://resumeapi.arterys.com/api/submission/3273a0ef-9253-4188-b728-197b2f802156'
-req = urllib2.Request(url)
-req.add_header('content_type', 'application/json')
-response = urllib2.urlopen(req, json_object)
+req = requests.post(url, json = json_object)
+print req.status_code
+
+# i
+# req = urllib2.Request(url)
+# req.add_header('content_type', 'application/json')
+# response = urllib2.urlopen(req, json_object)
