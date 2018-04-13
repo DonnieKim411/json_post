@@ -3,7 +3,7 @@ import hashlib
 import base64
 import urllib2
 import requests
-
+from pprint import pprint
 def calculate_MD5(filename):
 	'''
 	Calculate MD5 of an input file
@@ -42,10 +42,8 @@ json_dict = {
     "email": "kdk411@gmail.com",
     "name": "Donnie Kim",
     "position": "Machine Learning Intern",
-    "notes": {
-    	"GitHub repo": "https://github.com/kdk411",
-    	"LinkedIn": "https://www.linkedin.com/in/donnie-kim-96a20490/"
-    	},
+    "notes": "GitHub repo: https://github.com/kdk411, LinkedIn : https://www.linkedin.com/in/donnie-kim-96a20490/",
+
     "phone": "(856) 412-0402",
     "documents": {
         "resume": {
@@ -95,7 +93,8 @@ url = 'https://resumeapi.arterys.com/api/submission/3273a0ef-9253-4188-b728-197b
 
 headers = {'content-type': 'application/json'}
 payload = {'some': 'data'}
-req_post = requests.post(url, json = json.dumps(json_dict), headers=headers)
+req_post = requests.post(url, json = json_dict, headers=headers)
+pprint(vars(req_post))
 print req_post.status_code
 print req_post.text
 
