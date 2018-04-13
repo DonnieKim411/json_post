@@ -73,8 +73,11 @@ json_dict = {
 
 # # Write a json object
 with open('json_object_DonnieKim.json', 'w') as out:
-    json_object = json.dump(json_dict, out, indent = 4)
+    json.dump(json_dict, out, indent = 4)
 # >>>>>>> 5366a1d5fe6cc8a842e50307146b2e4840addb5b
+with open('json_object_DonnieKim.json', 'r') as out:
+    json_object = json.load(out)
+
 
 # print(type(dictionaryToJson))
 #post the json file
@@ -84,6 +87,9 @@ url = 'https://resumeapi.arterys.com/api/submission/3273a0ef-9253-4188-b728-197b
 # req.add_header('content_type', 'application/json')
 # response = urllib2.urlopen(req, dictionaryToJson)
 # =======
+r = requests.post('http://httpbin.org/post', json=json_dict)
+print(r.status_code)
+
 req = requests.post(url, json = json_object)
 print req.status_code
 
