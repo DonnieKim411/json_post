@@ -68,12 +68,15 @@ json_dict = {
 # <<<<<<< HEAD
 # dictionaryToJson = json.dump(json_dict, sort_keys = True, indent=4)
 # =======
-# dictionaryToJson_str = json.dumps(json_dict, sort_keys = True, indent=4)
+dictionaryToJson_str = json.dumps(json_dict, sort_keys = True, indent=4)
+json_object = json.loads(dictionaryToJson_str)
 # #print(dictionaryToJson_str)
 
 # # Write a json object
 with open('json_object_DonnieKim.json', 'w') as out:
-    json_object = json.dump(json_dict, out, indent = 4)
+    json.dump(json_dict, out, indent = 4)
+print(type(json_object))
+
 # >>>>>>> 5366a1d5fe6cc8a842e50307146b2e4840addb5b
 
 # print(type(dictionaryToJson))
@@ -84,11 +87,10 @@ url = 'https://resumeapi.arterys.com/api/submission/3273a0ef-9253-4188-b728-197b
 # req.add_header('content_type', 'application/json')
 # response = urllib2.urlopen(req, dictionaryToJson)
 # =======
-req = requests.post(url, json = json_object)
-print req.status_code
+req_post = requests.post(url, json = {"key": "value"})
 
-# i
-# req = urllib2.Request(url)
-# req.add_header('content_type', 'application/json')
-# response = urllib2.urlopen(req, json_object)
-# >>>>>>> 5366a1d5fe6cc8a842e50307146b2e4840addb5b
+print req_post.status_code
+
+r = requests.post('http://httpbin.org/post', json=json_dict)
+print(r.status_code)
+#print(r.json())
