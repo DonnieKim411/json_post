@@ -41,7 +41,7 @@ code_base64 = str(base64_encode('json_creator.py'))
 json_dict = {
     "email": "kdk411@gmail.com",
     "name": "Donnie Kim",
-    "position": ["Machine Learning Scientist","Machine Learning Intern"],
+    "position": "Machine Learning Intern",
     "notes": {
     	"GitHub repo": "https://github.com/kdk411",
     	"LinkedIn": "https://www.linkedin.com/in/donnie-kim-96a20490/"
@@ -87,10 +87,18 @@ url = 'https://resumeapi.arterys.com/api/submission/3273a0ef-9253-4188-b728-197b
 # req.add_header('content_type', 'application/json')
 # response = urllib2.urlopen(req, dictionaryToJson)
 # =======
-req_post = requests.post(url, json = {"key": "value"})
 
+
+# req = urllib2.Request(url)
+# req.add_header('Content-Type', 'application/json')
+# response = urllib2.urlopen(req, json.dumps(json_dict))
+
+headers = {'content-type': 'application/json'}
+payload = {'some': 'data'}
+req_post = requests.post(url, json = json.dumps(json_dict), headers=headers)
 print req_post.status_code
+print req_post.text
 
-r = requests.post('http://httpbin.org/post', json=json_dict)
-print(r.status_code)
-#print(r.json())
+
+# r = requests.post('http://httpbin.org/post', json=json_dict)
+# print r.text
