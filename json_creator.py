@@ -64,6 +64,9 @@ json_dict = {
     "test_or_submit": "test"
 }
 
+dictionaryToJson = json.dumps(json_dict, sort_keys = True, indent=4)
+print(dictionaryToJson)
+
 # Write a json object
 with open('json_object_DonnieKim.json', 'w') as out:
 	json_object = json.dumps(json_dict, out)
