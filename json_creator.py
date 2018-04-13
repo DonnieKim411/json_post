@@ -3,7 +3,7 @@ import hashlib
 import base64
 import urllib2
 import requests
-
+from pprint import pprint
 def calculate_MD5(filename):
 	'''
 	Calculate MD5 of an input file
@@ -41,11 +41,8 @@ code_base64 = str(base64_encode('json_creator.py'))
 json_dict = {
     "email": "kdk411@gmail.com",
     "name": "Donnie Kim",
-    "position": ["Machine Learning Scientist","Machine Learning Intern"],
-    "notes": {
-    	"GitHub repo": "https://github.com/kdk411",
-    	"LinkedIn": "https://www.linkedin.com/in/donnie-kim-96a20490/"
-    	},
+    "position": "Machine Learning Scientist",
+    "notes": "GitHub repo: https://github.com/kdk411, LinkedIn : https://www.linkedin.com/in/donnie-kim-96a20490/",
     "phone": "(856) 412-0402",
     "documents": {
         "resume": {
@@ -62,39 +59,25 @@ json_dict = {
             "filename": "json_creator.py"
         }
     },
-    "test_or_submit": "test"
+    "test_or_submit": "submit"
 }
 
-# <<<<<<< HEAD
-# dictionaryToJson = json.dump(json_dict, sort_keys = True, indent=4)
-# =======
-# dictionaryToJson_str = json.dumps(json_dict, sort_keys = True, indent=4)
-# #print(dictionaryToJson_str)
 
-# # Write a json object
+dictionaryToJson_str = json.dumps(json_dict, sort_keys = True, indent=4)
+json_object = json.loads(dictionaryToJson_str)
+
+# Write a json object
 with open('json_object_DonnieKim.json', 'w') as out:
     json.dump(json_dict, out, indent = 4)
-# >>>>>>> 5366a1d5fe6cc8a842e50307146b2e4840addb5b
+
 with open('json_object_DonnieKim.json', 'r') as out:
     json_object = json.load(out)
 
 
-# print(type(dictionaryToJson))
 #post the json file
 url = 'https://resumeapi.arterys.com/api/submission/3273a0ef-9253-4188-b728-197b2f802156'
-# <<<<<<< HEAD
-# req = urllib2.Request(url)
-# req.add_header('content_type', 'application/json')
-# response = urllib2.urlopen(req, dictionaryToJson)
-# =======
-r = requests.post('http://httpbin.org/post', json=json_dict)
-print(r.status_code)
 
 req = requests.post(url, json = json_object)
 print req.status_code
+print req.text
 
-# i
-# req = urllib2.Request(url)
-# req.add_header('content_type', 'application/json')
-# response = urllib2.urlopen(req, json_object)
-# >>>>>>> 5366a1d5fe6cc8a842e50307146b2e4840addb5b
