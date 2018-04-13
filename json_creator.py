@@ -2,6 +2,7 @@ import json
 import hashlib
 import base64
 import urllib2
+import requests
 
 def calculate_MD5(filename):
 	'''
@@ -64,11 +65,30 @@ json_dict = {
     "test_or_submit": "test"
 }
 
-dictionaryToJson = json.dump(json_dict, sort_keys = True, indent=4)
+# <<<<<<< HEAD
+# dictionaryToJson = json.dump(json_dict, sort_keys = True, indent=4)
+# =======
+# dictionaryToJson_str = json.dumps(json_dict, sort_keys = True, indent=4)
+# #print(dictionaryToJson_str)
 
-print(type(dictionaryToJson))
+# # Write a json object
+with open('json_object_DonnieKim.json', 'w') as out:
+    json_object = json.dump(json_dict, out, indent = 4)
+# >>>>>>> 5366a1d5fe6cc8a842e50307146b2e4840addb5b
+
+# print(type(dictionaryToJson))
 #post the json file
 url = 'https://resumeapi.arterys.com/api/submission/3273a0ef-9253-4188-b728-197b2f802156'
-req = urllib2.Request(url)
-req.add_header('content_type', 'application/json')
-response = urllib2.urlopen(req, dictionaryToJson)
+# <<<<<<< HEAD
+# req = urllib2.Request(url)
+# req.add_header('content_type', 'application/json')
+# response = urllib2.urlopen(req, dictionaryToJson)
+# =======
+req = requests.post(url, json = json_object)
+print req.status_code
+
+# i
+# req = urllib2.Request(url)
+# req.add_header('content_type', 'application/json')
+# response = urllib2.urlopen(req, json_object)
+# >>>>>>> 5366a1d5fe6cc8a842e50307146b2e4840addb5b
