@@ -42,10 +42,10 @@ json_dict = {
     "name": "Donnie Kim",
     "position": ["Machine Learning Scientist","Machine Learning Intern"],
     "notes": {
-    	"GitHub repo": "https://github.com/kdk411. LinkedIn",
+    	"GitHub repo": "https://github.com/kdk411",
     	"LinkedIn": "https://www.linkedin.com/in/donnie-kim-96a20490/"
     	},
-    "phone": "(555) 664-7665",
+    "phone": "(856) 412-0402",
     "documents": {
         "resume": {
             "content": resume_base64,
@@ -58,21 +58,17 @@ json_dict = {
         "code": {
             "content": code_base64,
             "md5": code_md5,
-            "filename": "python_code_DonnieKim.tar.gz"
+            "filename": "json_creator.py"
         }
     },
     "test_or_submit": "test"
 }
 
-dictionaryToJson = json.dumps(json_dict, sort_keys = True, indent=4)
-print(dictionaryToJson)
+dictionaryToJson = json.dump(json_dict, sort_keys = True, indent=4)
 
-# Write a json object
-with open('json_object_DonnieKim.json', 'w') as out:
-	json_object = json.dumps(json_dict, out)
-
+print(type(dictionaryToJson))
 #post the json file
 url = 'https://resumeapi.arterys.com/api/submission/3273a0ef-9253-4188-b728-197b2f802156'
 req = urllib2.Request(url)
 req.add_header('content_type', 'application/json')
-response = urllib2.urlopen(req, json_object)
+response = urllib2.urlopen(req, dictionaryToJson)
